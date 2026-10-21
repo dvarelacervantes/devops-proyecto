@@ -16,6 +16,3 @@ def dividir(a, b):
             "El divisor no puede ser cero. Proporciona un número distinto de 0.")
     return a / b
 
-def funcion_nueva_con_bug():
-    # Este bug haría fallar la aplicación en producción
-    return 1 / 0
