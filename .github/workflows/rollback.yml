@@ -1,0 +1,37 @@
+
+name: Rollback Manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Versión a la que revertir (commit hash)"
+        required: true
+        type: string
+      environment:
+        description: "Ambiente donde hacer rollback"
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  rollback:
+    name: Rollback en ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: Simular rollback
+        run: |
+          echo "========================================="
+          echo "  ROLLBACK MANUAL"
+          echo "  Versión destino: ${{ inputs.version }}"
+          echo "  Ambiente: ${{ inputs.environment }}"
+          echo "========================================="
+          echo "Rollback simulado completado exitosamente"
