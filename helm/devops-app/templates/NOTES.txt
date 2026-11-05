@@ -1,0 +1,6 @@
+La aplicación se ha desplegado correctamente en Kubernetes.
+
+Para acceder a la aplicación:
+kubectl port-forward svc/devops-app 8080:80 -n {{ .Release.Namespace }}
+
+Abre http://127.0.0.1:8080 en tu navegador.
