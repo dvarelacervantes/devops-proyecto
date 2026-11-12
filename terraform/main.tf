@@ -44,3 +44,5 @@ resource "azurerm_kubernetes_cluster" "aks" {
     project     = "devops-academia"
   }
 }
+
+# Activacion del pipeline Terraform IaC - Lab S29
