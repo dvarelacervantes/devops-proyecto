@@ -1,4 +1,3 @@
-
 name: Terraform IaC
 
 on:
@@ -58,7 +57,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
       - name: Terraform Apply (solo en main)
-        if: github.ref == 'refs/heads/main'
+        if: ${{ false }}
         working-directory: terraform
         run: terraform apply -auto-approve tfplan
         env:
