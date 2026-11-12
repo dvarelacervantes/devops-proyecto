@@ -15,7 +15,7 @@ resource "azurerm_virtual_network" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name = "ststagingdevops1364"
+  name                     = "ststagingdevops1364"
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
@@ -44,3 +44,5 @@ resource "azurerm_kubernetes_cluster" "aks" {
     project     = "devops-academia"
   }
 }
+
+# Activacion del pipeline Terraform IaC - Lab S29
