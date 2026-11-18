@@ -5,7 +5,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
+permissions:
+  contents: read
+  security-events: write
 jobs:
   lint-and-test:
     name: Lint y Tests Unitarios
@@ -52,9 +54,16 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: devops-app:${{ github.sha }}
-          format: table
+          format: sarif
+          output: trivy-results.sarif
+          severity: HIGH,CRITICAL
           exit-code: '1'
-          severity: 'CRITICAL'
+
+      - name: Subir resultados a GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
 
       - name: Publicar imagen (solo en push a main)
         if: github.ref == 'refs/heads/main'
@@ -62,4 +71,4 @@ jobs:
           docker tag devops-app:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/devops-app:${{ github.sha }}
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-app:${{ github.sha }}
-        
+
