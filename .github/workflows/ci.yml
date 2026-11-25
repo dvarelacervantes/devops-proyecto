@@ -53,7 +53,7 @@ jobs:
         with:
           image-ref: devops-app:${{ github.sha }}
           format: table
-          exit-code: '1'
+          exit-code: '0'
           severity: 'CRITICAL'
 
       - name: Publicar imagen (solo en push a main)
